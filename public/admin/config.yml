@@ -1,0 +1,45 @@
+backend:
+  name: github
+  repo: YOUR-GITHUB-USERNAME/YOUR-REPO
+  branch: main
+media_folder: public/uploads
+public_folder: /uploads
+collections:
+  - name: didyouknow
+    label: Did you know (क्या आप जानते हैं)
+    folder: src/content/didyouknow
+    extension: json
+    format: json
+    create: true
+    slug: '{{year}}-{{month}}-{{day}}-{{slug}}'
+    fields:
+      - {name: title, label: Name (Hindi), widget: string}
+      - {name: titleEn, label: Name (English), widget: string, required: false}
+      - {name: photo, label: Photo, widget: image, required: false}
+      - {name: points, label: Exactly 3 points, widget: list, min: 3, max: 3, field: {name: point, label: Point, widget: string}}
+      - {name: publishDate, label: Publish date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD}
+  - name: site
+    label: Site settings
+    files:
+      - name: settings
+        label: Settings
+        file: src/data/settings.json
+        fields:
+          - {name: siteName, label: Site name, widget: string}
+          - {name: logo, label: Logo, widget: image, required: false}
+          - {name: youtubeChannelId, label: YouTube channel ID (starts with UC), widget: string, required: false}
+          - {name: adsensePublisher, label: AdSense publisher ID (ca-pub-...), widget: string, required: false}
+          - name: slots
+            label: AdSense slot IDs
+            widget: object
+            fields:
+              - {name: top, label: Banner below day info, widget: string, required: false}
+              - {name: bottom, label: Bottom of page, widget: string, required: false}
+          - name: menu
+            label: Menu
+            widget: list
+            fields:
+              - {name: hi, label: Hindi label, widget: string}
+              - {name: en, label: English label, widget: string}
+              - {name: url, label: URL, widget: string}
+              - {name: show, label: Show, widget: boolean, default: true}
