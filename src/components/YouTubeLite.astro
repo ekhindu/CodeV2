@@ -1,0 +1,16 @@
+---
+const { id = '', title = '' } = Astro.props;
+---
+<button class="v" type="button" data-yt={id} aria-label={`Play: ${title}`}>
+  <span class="th">{id && <img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" width="480" height="360" />}<svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg></span>
+  <p>{title}</p>
+</button>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-yt]').forEach((b) => {
+    b.addEventListener('click', () => {
+      const id = b.dataset.yt; if (!id) return;
+      const th = b.querySelector('.th')!;
+      th.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="YouTube video"></iframe>`;
+    }, { once: true });
+  });
+</script>

@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const today = new Date(Date.now() + 19800000).toISOString().slice(0, 10);
+const facts = (await getCollection('didyouknow')).filter((e) => e.data.publishDate.toISOString().slice(0, 10) <= today).sort((a, b) => +b.data.publishDate - +a.data.publishDate);
+---
+<Base title="दैनिक जानकारी – ekhindu.org">
+  <section><h1 data-en="Daily facts">दैनिक जानकारी</h1>
+    {facts.map((f) => (
+      <div class="card dyk" style="margin-bottom:10px">
+        <div class="ph">{f.data.photo ? <img src={f.data.photo} alt={f.data.title} loading="lazy" /> : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" /></svg>}</div>
+        <div><strong>{f.data.title}</strong><ul>{f.data.points.map((p) => <li>{p}</li>)}</ul></div>
+      </div>))}
+  </section>
+</Base>

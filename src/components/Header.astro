@@ -1,0 +1,35 @@
+---
+import settings from '../data/settings.json';
+const menu = settings.menu.filter((m) => m.show); const p = Astro.url.pathname;
+---
+<header><div class="wrap">
+  <div class="hb">
+    <a class="logo" href="/" aria-label="Home">
+      {settings.logo ? <img src={settings.logo} alt={settings.siteName} /> : <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M16 29V14M16 20c-4 0-8-3-8-8M16 17c4 0 8-3 8-8M16 14c-3-2-4-5-4-8M16 12c3-2 4-5 4-8"/></svg>}
+      <span>{settings.siteName}</span>
+    </a>
+    <nav aria-label="Main">{menu.map((m) => <a href={m.url} class={p === m.url ? 'on' : ''} data-en={m.en}>{m.hi}</a>)}</nav>
+    <span class="sp"></span>
+    <div class="tg">
+      <button class="pill" id="theme" aria-label="Switch light or dark theme">◐</button>
+      <button class="pill" id="lang" aria-label="Switch language">हिन्दी / EN</button>
+      <button class="pill ham" id="ham" aria-label="Menu" aria-expanded="false">☰</button>
+    </div>
+  </div>
+  <div class="drawer" id="drawer">{menu.map((m) => <a href={m.url} data-en={m.en}>{m.hi}</a>)}</div>
+</div></header>
+<script>
+  const root = document.documentElement;
+  document.getElementById('theme')!.onclick = () => {
+    const dark = root.getAttribute('data-theme') ? root.getAttribute('data-theme') === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    const n = dark ? 'light' : 'dark'; root.setAttribute('data-theme', n);
+    try { localStorage.setItem('ek-theme', n); } catch (e) {}
+  };
+  let hi = true; const els = [...document.querySelectorAll<HTMLElement>('[data-en]')];
+  els.forEach((e) => (e.dataset.hi = e.textContent || ''));
+  const setLang = () => { root.lang = hi ? 'hi' : 'en'; els.forEach((e) => (e.textContent = (hi ? e.dataset.hi : e.dataset.en) || '')); };
+  try { if (localStorage.getItem('ek-lang') === 'en') { hi = false; setLang(); } } catch (e) {}
+  document.getElementById('lang')!.onclick = () => { hi = !hi; setLang(); try { localStorage.setItem('ek-lang', hi ? 'hi' : 'en'); } catch (e) {} };
+  const dr = document.getElementById('drawer')!, hm = document.getElementById('ham')!;
+  hm.onclick = () => hm.setAttribute('aria-expanded', String(dr.classList.toggle('open')));
+</script>

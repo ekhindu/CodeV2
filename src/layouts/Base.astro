@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AdSlot from '../components/AdSlot.astro';
+import settings from '../data/settings.json';
+const { title = 'ekhindu.org – हिंदू पंचांग, भक्ति और वीर गाथा', description = 'दैनिक हिंदू पंचांग, तिथि, त्योहार, मुहूर्त, स्वतंत्रता सेनानी और प्राचीन राजाओं की कथाएँ। Daily Hindu Panchang, festivals and heroes of India.' } = Astro.props;
+const url = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title}</title><meta name="description" content={description} /><link rel="canonical" href={url} />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:url" content={url} /><meta property="og:type" content="website" /><meta property="og:locale" content="hi_IN" /><meta property="og:locale:alternate" content="en_IN" />
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'WebSite', name: 'ekhindu.org', url: 'https://ekhindu.org', inLanguage: ['hi', 'en'] })} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet" />
+  <script is:inline>try{var t=localStorage.getItem('ek-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  {settings.adsensePublisher && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${settings.adsensePublisher}`} crossorigin="anonymous"></script>}
+</head>
+<body>
+  <Header />
+  <main class="wrap"><slot /><AdSlot name="bottom" tall /></main>
+  <Footer />
+</body>
+</html>

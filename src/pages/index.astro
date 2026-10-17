@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import AdSlot from '../components/AdSlot.astro';
+import YouTubeLite from '../components/YouTubeLite.astro';
+import { getCollection } from 'astro:content';
+import settings from '../data/settings.json';
+
+const today = new Date(Date.now() + 19800000).toISOString().slice(0, 10); // IST
+const files = import.meta.glob('../data/panchang/*.json', { eager: true }) as Record<string, any>;
+const key = Object.keys(files).find((k) => k.includes(today.slice(0, 7))) ?? Object.keys(files)[0];
+const month = files[key].default; const days: any[] = month.days;
+const selIdx = Math.max(0, days.findIndex((d) => d.date === today)); const sel = days[selIdx];
+const lead = (new Date(days[0].date + 'T00:00:00Z').getUTCDay() + 6) % 7;
+const [y, m] = month.month.split('-').map(Number);
+const MH = ['जनवरी','फ़रवरी','मार्च','अप्रैल','मई','जून','जुलाई','अगस्त','सितंबर','अक्टूबर','नवंबर','दिसंबर'];
+const ME = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const hd = (n: number) => String(n).replace(/\d/g, (c) => '०१२३४५६७८९'[+c]);
+const tl = (d: any) => (d.tithiNo === 30 ? 'अ' : d.tithiNo === 15 ? 'पू' : hd(d.tithiNo > 15 ? d.tithiNo - 15 : d.tithiNo));
+const cls = (d: any, i: number) => ['c', i === selIdx ? 't' : '', d.festivals.length ? 'f' : '', d.tithiNo === 30 ? 'e' : ''].join(' ');
+const line = (d: any) => [
+  `तिथि: ${d.hindiMonth} ${d.paksha} ${d.tithi}${d.festivals.length ? ' · ' + d.festivals.join(', ') : ''}`,
+  `सूर्योदय ${d.sunrise} · सूर्यास्त ${d.sunset} · राहुकाल ${d.rahuKaal}`,
+  `चंद्रमा: ${d.moonPhase} · अभिजित मुहूर्त ${d.abhijitMuhurat} · ${month.location}`];
+const L = line(sel);
+
+const facts = (await getCollection('didyouknow')).filter((e) => e.data.publishDate.toISOString().slice(0, 10) <= today).sort((a, b) => +b.data.publishDate - +a.data.publishDate);
+const fact = facts[0];
+
+let vids: { id: string; title: string }[] = [];
+if (settings.youtubeChannelId) {
+  try {
+    const x = await (await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${settings.youtubeChannelId}`)).text();
+    vids = [...x.matchAll(/<entry>[\s\S]*?<yt:videoId>(.*?)<\/yt:videoId>[\s\S]*?<title>(.*?)<\/title>/g)].slice(0, 4)
+      .map((r) => ({ id: r[1], title: r[2].replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#39;/g, "'") }));
+  } catch (e) {}
+}
+while (vids.length < 4) vids.push({ id: '', title: 'वीडियो जल्द आ रहा है' });
+---
+<Base>
+  <section>
+    <div class="card">
+      <h2 data-en={`Calendar – ${ME[m - 1]} ${y}`}>कैलेंडर – {MH[m - 1]} {y}</h2>
+      <div class="cals">
+        <div><div class="cn" data-en="Hindi (tithi)">हिन्दी (तिथि)</div>
+          <div class="g">{['सो','मं','बु','गु','शु','श','र'].map((x) => <b>{x}</b>)}{Array(lead).fill(0).map(() => <i></i>)}
+            {days.map((d, i) => <button type="button" class={cls(d, i)} data-i={i}>{tl(d)}</button>)}</div></div>
+        <div><div class="cn" data-en="English (Gregorian)">अंग्रेज़ी (ग्रेगोरियन)</div>
+          <div class="g">{['M','T','W','T','F','S','S'].map((x) => <b>{x}</b>)}{Array(lead).fill(0).map(() => <i></i>)}
+            {days.map((d, i) => <button type="button" class={cls(d, i)} data-i={i}>{i + 1}</button>)}</div></div>
+      </div>
+      <div class="lg"><span style="--k:var(--ac)" data-en="Selected / today">चयनित / आज</span><span style="--k:var(--gos)" data-en="Festival">पर्व</span><span style="--k:var(--rd)" data-en="Amavasya">अमावस्या</span></div>
+    </div>
+    {month.sample && <p class="note">नमूना डेटा – असली तिथि और समय जाँचकर जोड़े जाएँगे।</p>}
+  </section>
+
+  <section class="info" id="info"><p>{L[0]}</p><p>{L[1]}</p><p>{L[2]}</p></section>
+  <AdSlot name="top" />
+
+  <section>
+    <h2 data-en="Did you know?">क्या आप जानते हैं?</h2>
+    {fact ? (
+      <div class="card dyk">
+        <div class="ph">{fact.data.photo ? <img src={fact.data.photo} alt={fact.data.title} loading="lazy" /> : <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7" /></svg>}</div>
+        <div><strong>{fact.data.title}</strong><ul>{fact.data.points.map((p) => <li>{p}</li>)}</ul><a class="more" href="/daily-facts/" data-en="More daily facts">और दैनिक जानकारी</a></div>
+      </div>) : <p class="note">जल्द आ रहा है</p>}
+  </section>
+
+  <section>
+    <h2 data-en="@ekhinduorg YouTube videos">@ekhinduorg यूट्यूब वीडियो</h2>
+    <div class="vg">{vids.map((v) => <YouTubeLite id={v.id} title={v.title} />)}</div>
+  </section>
+
+  <script is:inline type="application/json" id="pd" set:html={JSON.stringify(days.map((d) => ({ l: line(d) })))} />
+  <script>
+    const data = JSON.parse(document.getElementById('pd')!.textContent!);
+    const ps = document.querySelectorAll('#info p');
+    document.querySelectorAll<HTMLElement>('.c[data-i]').forEach((b) => b.addEventListener('click', () => {
+      const i = b.dataset.i!; data[+i].l.forEach((t: string, k: number) => (ps[k].textContent = t));
+      document.querySelectorAll('.c').forEach((x) => x.classList.toggle('t', (x as HTMLElement).dataset.i === i));
+    }));
+  </script>
+</Base>
