@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: YOUR-GITHUB-USERNAME/YOUR-REPO
+  repo: ekhindu/CodeV2
   branch: main
 media_folder: public/uploads
 public_folder: /uploads
