@@ -1,0 +1,15 @@
+---
+import Base from './Base.astro';
+const { title, description } = Astro.props;
+---
+<Base title={title} description={description}>
+  <article class="legal"><slot /></article>
+</Base>
+<style is:global>
+  html[lang="en"] .hi { display: none; }
+  html:not([lang="en"]) .en { display: none; }
+  .legal { max-width: 720px; margin: 18px auto; }
+  .legal h2 { font-size: 17px; margin: 18px 0 4px; color: var(--rd); font-family: inherit; font-weight: 600; }
+  .legal a { color: var(--ac); }
+  .legal .upd { font-size: 12px; color: var(--mu); }
+</style>
