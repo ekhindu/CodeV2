@@ -24,7 +24,7 @@
       "hi": "पंचांग",
       "en": "Panchang",
       "url": "/panchang/",
-      "show": false
+      "show": true
     },
     {
       "hi": "त्योहार",
