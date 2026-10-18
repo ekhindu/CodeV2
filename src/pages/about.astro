@@ -1,0 +1,40 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import { channel } from '../data/contact';
+---
+<LegalPage title="हमारे बारे में – ekhindu.org" description="ekhindu.org के बारे में: दैनिक हिंदू पंचांग, भक्ति, त्योहार और वीर गाथाएँ। About ekhindu.org.">
+  <div class="hi">
+    <h1>हमारे बारे में</h1>
+    <p>ekhindu.org एक स्वतंत्र हिंदी–अंग्रेज़ी वेबसाइट है। यहाँ हम भारतीय भक्ति परंपरा, दैनिक हिंदू पंचांग, त्योहारों, स्वतंत्रता सेनानियों और प्राचीन राजाओं की कथाओं को सरल भाषा में प्रस्तुत करते हैं।</p>
+    <h2>हम क्या देते हैं</h2>
+    <ul>
+      <li>दैनिक पंचांग: तिथि, पर्व/व्रत, चंद्र स्थिति, सूर्योदय, सूर्यास्त और राहुकाल।</li>
+      <li>“क्या आप जानते हैं?”: महान व्यक्तियों के बारे में तीन रोचक बातें।</li>
+      <li>हमारे यूट्यूब चैनल <a href={channel} rel="noopener">@ekhinduorg</a> के वीडियो।</li>
+      <li>आने वाले समय में: त्योहार पृष्ठ, शुभ मुहूर्त, वीर गाथा और राजा-महाराजा।</li>
+    </ul>
+    <h2>हमारा उद्देश्य</h2>
+    <p>हमारा लक्ष्य है कि हर दिन लोग अपनी संस्कृति, त्योहारों और इतिहास से आसानी से जुड़ सकें, और वह भी तेज़, हल्की और साफ़-सुथरी वेबसाइट पर।</p>
+    <h2>सामग्री और सटीकता</h2>
+    <p>पंचांग का समय डिफ़ॉल्ट रूप से नई दिल्ली के लिए दिखाया जाता है। अन्य शहरों में सूर्योदय, सूर्यास्त और मुहूर्त के समय अलग हो सकते हैं। हम जानकारी को ध्यान से तैयार करते हैं, फिर भी कोई त्रुटि दिखे तो कृपया हमें बताएँ।</p>
+    <h2>संपर्क</h2>
+    <p>सुझाव या सुधार के लिए <a href="/contact/">संपर्क पृष्ठ</a> देखें।</p>
+  </div>
+  <div class="en">
+    <h1>About us</h1>
+    <p>ekhindu.org is an independent Hindi and English website. We present Indian devotional culture, the daily Hindu Panchang, festivals, freedom fighters and stories of ancient kings in simple language.</p>
+    <h2>What we offer</h2>
+    <ul>
+      <li>Daily Panchang: tithi, festival or vrat, moon phase, sunrise, sunset and Rahu Kaal.</li>
+      <li>“Did you know?”: three interesting facts about great personalities.</li>
+      <li>Videos from our YouTube channel <a href={channel} rel="noopener">@ekhinduorg</a>.</li>
+      <li>Coming soon: festival pages, auspicious muhurat, heroes and kings.</li>
+    </ul>
+    <h2>Our aim</h2>
+    <p>We want people to connect with their culture, festivals and history every day, on a fast, light and clean website.</p>
+    <h2>Content and accuracy</h2>
+    <p>Panchang timings are shown for New Delhi by default. Sunrise, sunset and muhurat times can differ in other cities. We prepare information carefully, but if you notice a mistake please tell us.</p>
+    <h2>Contact</h2>
+    <p>For suggestions or corrections, see the <a href="/contact/">Contact page</a>.</p>
+  </div>
+</LegalPage>

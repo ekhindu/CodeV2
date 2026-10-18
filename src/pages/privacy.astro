@@ -1,0 +1,54 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import { email, updated } from '../data/contact';
+---
+<LegalPage title="प्राइवेसी पॉलिसी – ekhindu.org" description="ekhindu.org की प्राइवेसी पॉलिसी: कुकीज़, विज्ञापन और डेटा। Privacy Policy of ekhindu.org.">
+  <div class="hi">
+    <h1>प्राइवेसी पॉलिसी</h1>
+    <p class="upd">अंतिम अद्यतन: {updated.hi}</p>
+    <p>ekhindu.org (“हम”) आपकी गोपनीयता का सम्मान करता है। यह पृष्ठ बताता है कि इस वेबसाइट पर कौन-सी जानकारी उपयोग होती है।</p>
+    <h2>1. जानकारी जो हम एकत्र करते हैं</h2>
+    <p>हम खाता या पंजीकरण नहीं माँगते और सीधे आपके नाम, फ़ोन या पते जैसी व्यक्तिगत जानकारी एकत्र नहीं करते। यदि आप हमें ईमेल करते हैं, तो आपका ईमेल पता केवल उत्तर देने के लिए उपयोग होता है।</p>
+    <h2>2. आपके ब्राउज़र में सेव होने वाली पसंद</h2>
+    <p>आपकी थीम (लाइट/डार्क) और भाषा की पसंद आपके ब्राउज़र के स्थानीय भंडार (local storage) में सेव होती है, ताकि अगली बार वही सेटिंग मिले। यह जानकारी हमारे सर्वर पर नहीं भेजी जाती।</p>
+    <h2>3. कुकीज़ और विज्ञापन</h2>
+    <p>हम Google AdSense के माध्यम से विज्ञापन दिखा सकते हैं। Google सहित तृतीय-पक्ष विक्रेता कुकीज़ का उपयोग करके आपकी इस वेबसाइट और इंटरनेट पर अन्य वेबसाइटों की पिछली यात्राओं के आधार पर विज्ञापन दिखा सकते हैं। Google की विज्ञापन कुकीज़ के कारण वह और उसके साझेदार आपको यह विज्ञापन दिखा पाते हैं।</p>
+    <p>आप <a href="https://adssettings.google.com" rel="noopener">Google विज्ञापन सेटिंग</a> में जाकर वैयक्तिकृत विज्ञापन बंद कर सकते हैं। आप <a href="https://www.aboutads.info" rel="noopener">aboutads.info</a> पर भी तृतीय-पक्ष विक्रेताओं की वैयक्तिकृत विज्ञापन कुकीज़ से बाहर निकलने की जानकारी देख सकते हैं। कुछ क्षेत्रों में आपको सहमति का संदेश दिख सकता है।</p>
+    <h2>4. यूट्यूब वीडियो</h2>
+    <p>हमारे पृष्ठों पर यूट्यूब वीडियो एम्बेड हो सकते हैं। वीडियो चलाने पर YouTube/Google की अपनी गोपनीयता नीति और शर्तें लागू होती हैं।</p>
+    <h2>5. अन्य वेबसाइटों के लिंक</h2>
+    <p>हमारी वेबसाइट पर अन्य वेबसाइटों के लिंक हो सकते हैं। उनकी गोपनीयता नीतियों के लिए हम ज़िम्मेदार नहीं हैं।</p>
+    <h2>6. बच्चों की गोपनीयता</h2>
+    <p>हम 13 वर्ष से कम आयु के बच्चों से जानबूझकर कोई जानकारी एकत्र नहीं करते।</p>
+    <h2>7. होस्टिंग लॉग</h2>
+    <p>यह वेबसाइट GitHub Pages पर होस्ट है। होस्टिंग सेवा सुरक्षा और संचालन के लिए सामान्य सर्वर लॉग (जैसे IP पता) रख सकती है।</p>
+    <h2>8. नीति में बदलाव</h2>
+    <p>हम इस नीति को समय-समय पर बदल सकते हैं। बदलाव इसी पृष्ठ पर नई तारीख के साथ दिखाए जाएँगे।</p>
+    <h2>9. संपर्क</h2>
+    <p>प्रश्नों के लिए: <a href={`mailto:${email}`}>{email}</a></p>
+  </div>
+  <div class="en">
+    <h1>Privacy Policy</h1>
+    <p class="upd">Last updated: {updated.en}</p>
+    <p>ekhindu.org (“we”) respects your privacy. This page explains what information is used on this website.</p>
+    <h2>1. Information we collect</h2>
+    <p>We do not ask for accounts or registration, and we do not directly collect personal information such as your name, phone or address. If you email us, your email address is used only to reply.</p>
+    <h2>2. Preferences saved in your browser</h2>
+    <p>Your theme (light or dark) and language choice are saved in your browser’s local storage so the site remembers them next time. This is not sent to our servers.</p>
+    <h2>3. Cookies and advertising</h2>
+    <p>We may show ads through Google AdSense. Third-party vendors, including Google, use cookies to serve ads based on your previous visits to this website and other websites on the internet. Google’s advertising cookies allow it and its partners to serve ads to you.</p>
+    <p>You can turn off personalised advertising in <a href="https://adssettings.google.com" rel="noopener">Google Ads Settings</a>. You can also visit <a href="https://www.aboutads.info" rel="noopener">aboutads.info</a> to learn how to opt out of third-party vendors’ personalised advertising cookies. In some regions you may see a consent message.</p>
+    <h2>4. YouTube videos</h2>
+    <p>Our pages may embed YouTube videos. When you play a video, YouTube and Google’s own privacy policy and terms apply.</p>
+    <h2>5. Links to other websites</h2>
+    <p>Our website may link to other websites. We are not responsible for their privacy practices.</p>
+    <h2>6. Children’s privacy</h2>
+    <p>We do not knowingly collect information from children under 13.</p>
+    <h2>7. Hosting logs</h2>
+    <p>This website is hosted on GitHub Pages. The hosting service may keep standard server logs (such as IP addresses) for security and operations.</p>
+    <h2>8. Changes to this policy</h2>
+    <p>We may update this policy from time to time. Changes will appear on this page with a new date.</p>
+    <h2>9. Contact</h2>
+    <p>Questions: <a href={`mailto:${email}`}>{email}</a></p>
+  </div>
+</LegalPage>

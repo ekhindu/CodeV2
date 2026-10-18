@@ -1,0 +1,38 @@
+---
+import LegalPage from '../layouts/LegalPage.astro';
+import { email, channel } from '../data/contact';
+---
+<LegalPage title="संपर्क – ekhindu.org" description="ekhindu.org से संपर्क करें। Contact ekhindu.org.">
+  <div class="hi">
+    <h1>संपर्क करें</h1>
+    <p>आपके सुझाव, सुधार और प्रश्न हमारे लिए महत्वपूर्ण हैं।</p>
+    <h2>ईमेल</h2>
+    <p><a href={`mailto:ekhindu.org@gmail.com`}>ekhindu.org@gmail.com</a></p>
+    <h2>यूट्यूब</h2>
+    <p><a href={channel} rel="noopener">@ekhinduorg</a></p>
+    <h2>किस विषय पर लिखें</h2>
+    <ul>
+      <li>पंचांग, तिथि या पर्व की तारीख में कोई त्रुटि।</li>
+      <li>सामग्री या वीडियो के बारे में सुझाव।</li>
+      <li>किसी सामग्री पर कॉपीराइट संबंधी आपत्ति।</li>
+      <li>विज्ञापन या अन्य सहयोग संबंधी प्रश्न।</li>
+    </ul>
+    <p>हम सामान्यतः कुछ कार्यदिवसों में उत्तर देने का प्रयास करते हैं।</p>
+  </div>
+  <div class="en">
+    <h1>Contact us</h1>
+    <p>Your suggestions, corrections and questions matter to us.</p>
+    <h2>Email</h2>
+    <p><a href={`mailto:ekhindu.org@gmail.com`}>ekhindu.org@gmail.com</a></p>
+    <h2>YouTube</h2>
+    <p><a href={channel} rel="noopener">@ekhinduorg</a></p>
+    <h2>What you can write to us about</h2>
+    <ul>
+      <li>A mistake in a Panchang, tithi or festival date.</li>
+      <li>Suggestions about content or videos.</li>
+      <li>A copyright concern about any content.</li>
+      <li>Advertising or collaboration questions.</li>
+    </ul>
+    <p>We try to reply within a few working days.</p>
+  </div>
+</LegalPage>
